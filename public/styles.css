@@ -1,0 +1,253 @@
+body {
+  margin: 0;
+  background-color: #121212;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register-box {
+  margin-top: 100px;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: black;
+  width: 300px;
+  text-align: center;
+}
+
+.register-box input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+}
+
+.register-box button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 2px solid #1ee184;
+  width : 100%;
+}
+
+/* .quizzyHead {
+  display: flex;
+  align-items: left;
+  margin-left: 20px;
+} */
+
+.header h1 {
+  font-size: 2.5em;
+  color: #1ee184;
+  margin: 0;
+  margin-left: 20px;
+}
+
+.welcome-text {
+  flex: 1;
+  font-size: 1em;
+  color: #ffffff;
+  text-align: center;
+  margin-right: 500px;
+}
+
+.header-buttons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+.button {
+  background-color: #1ee184;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #17c06d;
+}
+
+.quizzyHead {
+  color: #1ee184;
+  text-decoration: none;
+}
+.quizzyHead a:visited,
+.quizzyHead a:active,
+.quizzyHead a:hover {
+  color: #1ee184;
+  text-decoration: none;
+}
+
+.register-box, .quiz-box {
+  background: #222;
+  color: #fff;
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 30px 30px 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #1ee18444;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quiz-form label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.quiz-form input[type="text"],
+.quiz-form textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 10px;
+  font-size: 1em;
+}
+
+.quiz-form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.quiz-form button {
+  background: #1ee184;
+  color: #222;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 30px;
+  font-size: 1em;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s;
+}
+
+.quiz-form button:hover {
+  background: #17c06d;
+}
+
+.quiz-box.large {
+  max-width: 700px;
+  min-width: 350px;
+  width: 90%;
+  padding: 40px 40px 30px 40px;
+}
+.answers-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 20px;
+  margin-bottom: 20px;
+}
+.answers-wrapper label {
+  grid-column: span 2;
+  margin-top: 10px;
+}
+.answers-wrapper input[type="text"] {
+  grid-column: span 2;
+}
+
+.quiz-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin: 32px 24px 0 24px;
+  justify-content: flex-start;
+}
+
+.quiz-card {
+  background: #222;
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #1ee18444;
+  padding: 24px 20px 20px 20px;
+  min-width: 220px;
+  max-width: 260px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.quiz-card h2 {
+  margin-bottom: 16px;
+  font-size: 1.3em;
+  text-align: center;
+}
+
+.quiz-answer-option {
+  display: flex ;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.quiz-answer-option input[type="radio"]{
+  margin-right: 10px;
+}
+
+.admin-edit-btn {
+  background-color: #ff9800 !important; 
+  color: #fff !important;
+  font-size: 0.9em;
+  padding: 6px 16px;
+  margin-left: 8px;
+  margin-top: 0;
+  border-radius: 16px;
+  border: none;
+}
+
+.admin-edit-btn:hover {
+  background-color: #e65100 !important; 
+  color: #fff !important;
+}
+
+.admin-delete-btn {
+  background-color: #e11e1e;
+  color: #fff;
+  font-size: 0.9em;
+  padding: 6px 16px;
+  margin-left: 8px;
+  margin-top: 0;
+  border-radius: 16px;
+}
+
+.admin-delete-btn:hover {
+  background-color: #b71c1c;
+}
+
+.admin-btn-row {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+.admin-btn-row form {
+  margin: 0;
+}

@@ -1,0 +1,19 @@
+<%- include('partials/header') %>
+<title>Welcome</title>
+
+<body>
+  <main>
+    
+    <% if (user) { %>
+      <h2>Welcome to Quizzy!</h2>
+      <p>Test your knowledge and have fun with our exciting quizzes!</p>
+      <p>Create or explore quizzes on the quiz dashboard!</p>  
+    
+    <% } else { %>
+      <h2>Welcome to Quizzy!</h2>
+      <p>Test your knowledge and have fun with our exciting quizzes!</p>
+      <p>Get started by logging in or registering!</p>
+    <% } %>
+  </main>
+</body>
+</html>

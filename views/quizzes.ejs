@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+
+<body>
+  <main>
+    <h1>Quiz Dashboard</h1>
+    <div class="quiz-list">
+      <% quizzes.forEach(quiz => { %>
+        <div class="quiz-card">
+          <h2><%= quiz.title %></h2>
+          <a href="/quizzes/<%= quiz._id %>" class="button">Take quiz</a>
+          <% if (user && user.role === 'admin') { %>
+            <div class="admin-btn-row">
+                <a href="/quizzes/<%= quiz._id %>/edit" class="button admin-edit-btn">Edit</a>
+                <form action="/quizzes/<%= quiz._id %>/delete" method="POST" style="display:inline;">
+                    <button type="submit" class="button admin-delete-btn" onclick="return confirm('Slett denne quizzen?')">Delete</button>
+                </form>
+            </div>
+        <% } %>
+        </div>
+      <% }) %>
+    </div>
+  </main>
+</body>

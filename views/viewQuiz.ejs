@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+
+<body>
+  <main>
+    <div class="quiz-box large">
+      <h1><%= quiz.title %></h1>
+      <p><%= quiz.description %></p>
+      <% if (question) { %>
+        <form method="POST" action="/quizzes/<%= quiz._id %>/answer?q=<%= qIndex %>" class="quiz-form">
+          <h2><%= question.question %></h2>
+          <% question.answers.forEach((ans, idx) => { %>
+            <div class="quiz-answer-option">
+              <input type="radio" id="ans<%= idx %>" name="answer" value="<%= idx %>" required>
+              <label for="ans<%= idx %>"><%= ans %></label>
+            </div>
+          <% }) %>
+          <button type="submit">Send answers</button>
+        </form>
+        <p>Question <%= qIndex + 1 %> of <%= quiz.questions.length %></p>
+      <% } else { %>
+        <p>No more questions in this quiz.</p>
+      <% } %>
+    </div>
+  </main>
+</body>
+</html>

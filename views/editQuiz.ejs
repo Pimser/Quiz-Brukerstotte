@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+
+<title>Edit Quiz</title>
+
+<body>
+  <main>
+    <div class="quiz-box large">
+      <h1>Rediger quiz</h1>
+      <form action="/quizzes/<%= quiz._id %>/edit" method="POST" class="quiz-form">
+        <label for="title">Tittel:</label>
+        <input type="text" id="title" name="title" value="<%= quiz.title %>" required>
+
+        <label for="description">Beskrivelse:</label>
+        <textarea id="description" name="description" required><%= quiz.description %></textarea>
+
+        <% quiz.questions.forEach(function(q, qIdx) { %>
+          <div class="question-block">
+            <label>Spørsmål <%= qIdx + 1 %>:</label>
+            <input type="text" name="questions[<%= qIdx %>][question]" value="<%= q.question %>" required>
+            <% q.answers.forEach(function(ans, aIdx) { %>
+              <label>Svaralternativ <%= aIdx + 1 %>:</label>
+              <input type="text" name="questions[<%= qIdx %>][answers][]" value="<%= ans %>">
+            <% }) %>
+            <label>Riktig svar (1-<%= q.answers.length %>):</label>
+            <input type="number" name="questions[<%= qIdx %>][correct]" min="1" max="<%= q.answers.length %>" value="<%= q.correct + 1 %>" required>
+          </div>
+        <% }) %>
+
+        <button type="submit">Lagre endringer</button>
+      </form>
+    </div>
+  </main>
+</body>

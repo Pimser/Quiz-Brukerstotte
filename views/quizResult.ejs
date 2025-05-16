@@ -1,0 +1,13 @@
+<%- include('partials/header') %>
+
+<title>Result</title>
+
+<body>
+  <main>
+    <div class="quiz-box large">
+      <h1>Result for "<%= quiz.title %>"</h1>
+      <p>You got <strong><%= numCorrect %> / <%= totalQuestions %></strong> Correct!</p>
+      <a href="/quizzes/quizDashboard" class="button">Back to dashboard</a>
+    </div>
+  </main>
+</body>

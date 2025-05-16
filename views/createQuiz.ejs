@@ -1,0 +1,60 @@
+<%- include('partials/header') %>
+
+<title>Create Quiz</title>
+
+  <script>
+    let questionCount = 1;
+    function addQuestion() {
+      questionCount++;
+      const container = document.getElementById('questions-container');
+      const html = `
+        <div class="question-block">
+          <label>Spørsmål ${questionCount}:</label>
+          <input type="text" name="questions[${questionCount - 1}][question]" required>
+          <label>Svaralternativ 1:</label>
+          <input type="text" name="questions[${questionCount - 1}][answers][]" required>
+          <label>Svaralternativ 2:</label>
+          <input type="text" name="questions[${questionCount - 1}][answers][]" required>
+          <label>Svaralternativ 3:</label>
+          <input type="text" name="questions[${questionCount - 1}][answers][]">
+          <label>Svaralternativ 4:</label>
+          <input type="text" name="questions[${questionCount - 1}][answers][]">
+          <label>Riktig svar (1-4):</label>
+          <input type="number" name="questions[${questionCount - 1}][correct]" min="1" max="4" required>
+        </div>
+      `;
+      container.insertAdjacentHTML('beforeend', html);
+    }
+  </script>
+</head>
+<body>
+  <main>
+    <div class="quiz-box large">
+      <h1>Lag en ny quiz</h1>
+      <form action="/quizzes/createQuiz" method="POST" class="quiz-form">
+        <label for="title">Tittel:</label>
+        <input type="text" id="title" name="title" required>
+        <label for="description">Beskrivelse:</label>
+        <textarea id="description" name="description" required></textarea>
+        <div id="questions-container">
+          <div class="question-block">
+            <label>Spørsmål 1:</label>
+            <input type="text" name="questions[0][question]" required>
+            <label>Svaralternativ 1:</label>
+            <input type="text" name="questions[0][answers][]" required>
+            <label>Svaralternativ 2:</label>
+            <input type="text" name="questions[0][answers][]" required>
+            <label>Svaralternativ 3:</label>
+            <input type="text" name="questions[0][answers][]">
+            <label>Svaralternativ 4:</label>
+            <input type="text" name="questions[0][answers][]">
+            <label>Riktig svar (1-4):</label>
+            <input type="number" name="questions[0][correct]" min="1" max="4" required>
+          </div>
+        </div>
+        <button type="button" onclick="addQuestion()">Legg til spørsmål</button>
+        <button type="submit">Opprett quiz</button>
+      </form>
+    </div>
+  </main>
+</body>
