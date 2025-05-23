@@ -13,6 +13,9 @@
   <%- include('partials/header') %>
   <div class="register-box">
     <h1>Register</h1>
+    <% if (typeof error !== "undefined" && error) { %>
+      <div class="form-error"><%= error %></div>
+    <% } %>
     <form action="/auth/register" method="POST">
       <input type="text" id="username" name="username" placeholder="Username" required>
       <input type="email" id="email" name="email" placeholder="Email" required>

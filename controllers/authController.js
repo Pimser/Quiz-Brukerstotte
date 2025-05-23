@@ -29,7 +29,7 @@ module.exports.login_post = async (req, res) => {
     const user = await User.findOne({ username });
     if (!user) {
       console.log('User not found for email:', username);
-      return res.status(400).json({ message: 'Invalid credentials' });
+      return res.render("login", { title: "Login", error: "Unvalid username or password!"})
     }
 
     console.log('Stored hashed password for email:', user.password);
@@ -39,7 +39,7 @@ module.exports.login_post = async (req, res) => {
 
     if (!isMatch) {
       console.log('Password mismatch for email:', username);
-      return res.status(400).json({ message: 'Invalid credentials' });
+      return res.render("login", {title: "Login", error: "Unvalid username or password!"})
     }
 
     const token = createToken(user._id);
@@ -49,7 +49,7 @@ module.exports.login_post = async (req, res) => {
     res.redirect('/');
   } catch (err) {
     console.error('Error during login:', err);
-    res.status(500).json({ message: 'Server error' });
+    res.render('login', { title: 'Login', error: 'Serverfeil. Prøv igjen.' });
   }
 };
 
@@ -65,31 +65,30 @@ module.exports.register_post = [
   body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
   async (req, res) => {
     const errors = validationResult(req);
-    if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
+    if (!errors.isEmpty()) {
+      return res.render("register", {
+        title: "Register",
+        error: errors.array().map(e => e.msg).join("<br>")
+      })
+    }
 
     const { username, email, password } = req.body;
-    console.log('Registration attempt with email:', email);
 
     try {
       if (!process.env.JWT_SECRET) {
-        console.error('JWT_SECRET is not set in the environment variables.');
-        return res.status(500).json({ message: 'Server configuration error' });
+        return res.render("register", {title: "Register", error: "Server configuration error!" })
       }
 
       const hashedPassword = await bcrypt.hash(password);
-      console.log('Password hashed successfully for email:', email);
-
       const user = new User({ username, email, password: hashedPassword, role: 'user' });
       await user.save();
-      console.log('User saved successfully with email:', email);
 
       const token = createToken(user._id);
-      console.log('JWT generated for user ID during registration:', user._id);
       res.cookie('token', token, { httpOnly: true , maxAge: maxAge * 1000 }); // Assign JWT as a cookie
       res.redirect('/');
     } catch (err) {
       console.error('Error during registration for email:', email, err);
-      res.status(500).json({ message: 'Server error' });
+      res.render("register", { title: "Register", error: errorMsg});
     }
   }
 ];

@@ -2,7 +2,7 @@
 
 <body>
   <main>
-    <h1>Quiz Dashboard</h1>
+    <h1 class="Dash-text">Quiz Dashboard</h1>
     <div class="quiz-list">
       <% quizzes.forEach(quiz => { %>
         <div class="quiz-card">
@@ -16,6 +16,9 @@
                 </form>
             </div>
         <% } %>
+        <div class="quiz-creator">
+            <small>By <%= quiz.creator ? quiz.creator.username : "Unknown" %></small>
+        </div>
         </div>
       <% }) %>
     </div>

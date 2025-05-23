@@ -11,6 +11,8 @@
         <div class="question-block">
           <label>Spørsmål ${questionCount}:</label>
           <input type="text" name="questions[${questionCount - 1}][question]" required>
+          <label for="questionImage${questionCount - 1}">Question Image:</label>
+          <input type="file" name="questionImages" id="questionImage${questionCount - 1}" accept="image/*">
           <label>Svaralternativ 1:</label>
           <input type="text" name="questions[${questionCount - 1}][answers][]" required>
           <label>Svaralternativ 2:</label>
@@ -31,15 +33,19 @@
   <main>
     <div class="quiz-box large">
       <h1>Lag en ny quiz</h1>
-      <form action="/quizzes/createQuiz" method="POST" class="quiz-form">
+      <form action="/quizzes/createQuiz" method="POST" enctype="multipart/form-data" class="quiz-form">
         <label for="title">Tittel:</label>
         <input type="text" id="title" name="title" required>
+        <label for="coverImage">Quiz Cover Image:</label>
+        <input type="file" id="coverImage" name="coverImage" accept="image/*">
         <label for="description">Beskrivelse:</label>
         <textarea id="description" name="description" required></textarea>
         <div id="questions-container">
           <div class="question-block">
             <label>Spørsmål 1:</label>
             <input type="text" name="questions[0][question]" required>
+            <label for="questionImage${questionCount - 1}">Question Image:</label>
+            <input type="file" name="questionImages" id="questionImage${questionCount - 1}" accept="image/*">
             <label>Svaralternativ 1:</label>
             <input type="text" name="questions[0][answers][]" required>
             <label>Svaralternativ 2:</label>

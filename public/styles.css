@@ -1,3 +1,7 @@
+html, body {
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   background-color: #121212;
@@ -184,7 +188,8 @@ body {
 }
 
 .quiz-card {
-  background: #222;
+  background-image: url('/uploads/<%= quiz.coverImage %>');
+  background-size: cover;
   color: #fff;
   border-radius: 12px;
   box-shadow: 0 0 10px #1ee18444;
@@ -250,4 +255,50 @@ body {
 }
 .admin-btn-row form {
   margin: 0;
+}
+
+.form-error {
+  color: #e11e1e;
+  background: #fff0f0;
+  border: 1px solid #e11e1e;
+  border-radius: 6px;
+  padding: 8px 12px;
+  margin-bottom: 16px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.quiz-creator {
+  margin-top: 18px;
+  color: #888;
+  font-size: 0.95em;
+  text-align: center;
+}
+
+.Dash-text {
+  color: #1ee184;
+  text-align: center;
+  text-shadow: 0 2px 12px #1ee183c8;
+}
+
+.question-img {
+  max-width: 350px;
+  max-height: 200px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto 16px auto;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.quiz-cover-img {
+  max-width: 350px;
+  max-height: 200px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto 16px auto;
+  border-radius: 8px;
+  object-fit: contain;
 }

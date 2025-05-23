@@ -3,7 +3,27 @@ const router = express.Router();
 const quizController = require("../controllers/quizController");
 const adminMiddleware = require("../middleware/adminMiddleware");
 const adminController = require("../controllers/adminController");
+const multer = require("multer");
+const path = require("path");
 
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "public/uploads/");
+  }, 
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + "-" + file.originalname.replace(/\s+/g, ""));
+  }
+});
+const upload = multer({ storage: storage });
+
+router.post(
+  "/createQuiz",
+  upload.fields([
+    {name: "coverImage", maxCount: 1},
+    { name: "questionImages" }
+  ]),
+  quizController.createQuiz_post
+);
 
 
 //Get Quiz paths:

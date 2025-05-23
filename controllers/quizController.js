@@ -5,7 +5,7 @@ const Quiz = require('../models/Quiz');
 module.exports.quizDashboard_get = async (req, res) => {
 
   try {
-    const quizzes = await Quiz.find();
+    const quizzes = await Quiz.find().populate("creator");
     res.render('quizzes', {quizzes, user: res.locals.user, title: "Quiz Dashboard"});
   } catch (err) {
     res.status(500).send("Error on dashboardController");
@@ -19,30 +19,37 @@ module.exports.createQuiz_get = async (req, res) => {
 module.exports.createQuiz_post = async (req, res) => {
   try {
     const { title, description, questions } = req.body;
+    const files = req.files || {};
+    const coverImage = req.files["coverImage"] ? req.files["coverImage"][0].filename : null;
+    const questionImages = req.files["questionImages"] || [];
+
     // questions er nå et array av spørsmål
     const formattedQuestions = Array.isArray(questions)
-      ? questions.map(q => ({
+      ? questions.map((q, idx) => ({
           question: q.question,
           answers: Array.isArray(q.answers) ? q.answers.filter(ans => ans && ans.trim() !== "") : [],
-          correct: Number(q.correct) - 1
+          correct: Number(q.correct) - 1,
+          image: questionImages[idx] ? questionImages[idx].filename : null
         }))
       : [];
     const quiz = new Quiz({
       title,
       description,
-      questions: formattedQuestions
+      questions: formattedQuestions,
+      creator: res.locals.user ? res.locals.user._id : null, // Lagrer bruker ID
+      coverImage
     });
     await quiz.save();
     res.redirect('/quizzes/quizDashboard');
   } catch (err) {
     console.log(err);
-    res.status(500).send("Kunne ikke opprette quiz");
+    res.status(500).send("Could not create quiz");
   }
 };
 
 module.exports.viewQuiz_get = async (req, res) => {
   try {
-    const quiz = await Quiz.findById(req.params.id);
+    const quiz = await Quiz.findById(req.params.id).populate("creator");
     if (!quiz) return res.status(404).send('Quiz ikke funnet');
     // Hent spørsmål-indeks fra query, default 0
     const qIndex = Number(req.query.q) || 0;
